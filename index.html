@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preguntados - Tec. en Ciencias de Datos e IA</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==================== CABECERA ==================== -->
+  <header>
+    <h1>🎯 PREGUNTADOS</h1>
+    <p class="subtitulo">Tecnicatura en Ciencias de Datos e Inteligencia Artificial</p>
+
+    <div class="marcador" id="marcador">
+      <div class="equipo" id="equipo1">
+        <span class="nombre" id="nombre1">EQUIPO 1</span>
+        <span class="puntos" id="puntos1">0</span>
+        <span class="conquistas" id="conquistas1">0/8 asignaturas</span>
+      </div>
+
+      <div class="turno" id="turno">Turno: Equipo 1</div>
+
+      <div class="equipo" id="equipo2">
+        <span class="nombre">EQUIPO 2</span>
+        <span class="puntos" id="puntos2">0</span>
+        <span class="conquistas" id="conquistas2">0/8 asignaturas</span>
+      </div>
+    </div>
+
+    <button id="btn-reiniciar" class="btn-reiniciar oculto">🔄 Reiniciar juego</button>
+  </header>
+
+  <!-- ==================== PANTALLA: MENÚ ==================== -->
+  <main id="pantalla-menu">
+    <h2 class="titulo-menu">¿Cómo querés jugar?</h2>
+    <div class="menu-botones">
+      <button id="btn-equipos" class="boton-menu naranja">
+        <span class="icono">👥</span>
+        <span>2 Equipos</span>
+        <small>Turnos alternados, gana el primero en conquistar las 8</small>
+      </button>
+      <button id="btn-individual" class="boton-menu azul">
+        <span class="icono">👤</span>
+        <span>Un jugador</span>
+        <small>Solo vos: girá, respondé y sumá puntos</small>
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== PANTALLA: RULETA ==================== -->
+  <main id="pantalla-ruleta" class="oculto">
+    <h2 id="resultado-ruleta" class="resultado-ruleta">¡Girá la ruleta para empezar!</h2>
+
+    <div class="ruleta-contenedor">
+      <!-- Flecha que marca la sección elegida -->
+      <div class="flecha">▼</div>
+      <!-- La ruleta se dibuja desde juego.js -->
+      <canvas id="ruleta" width="340" height="340"></canvas>
+    </div>
+
+    <button id="btn-girar" class="btn-girar">🎡 Girar ruleta</button>
+    <p class="preguntas-restantes" id="preguntas-restantes"></p>
+  </main>
+
+  <!-- ==================== PANTALLA: PREGUNTA ==================== -->
+  <main id="pantalla-pregunta" class="oculto">
+    <div class="tarjeta-pregunta">
+      <span class="categoria-tag" id="categoria-tag"></span>
+      <h2 id="texto-pregunta"></h2>
+      <div id="opciones" class="opciones"></div>
+      <p class="feedback" id="feedback"></p>
+      <button id="btn-seguir" class="btn-girar oculto">Continuar</button>
+    </div>
+  </main>
+
+  <!-- ==================== PANTALLA: FINAL ==================== -->
+  <main id="pantalla-final" class="oculto">
+    <h2>🏆 ¡Juego terminado! 🏆</h2>
+    <p class="ganador" id="ganador"></p>
+    <div class="marcador-final" id="marcador-final"></div>
+    <button id="btn-jugar-otra" class="btn-girar">🔄 Jugar otra vez</button>
+    <button id="btn-cambiar-modo" class="btn-reiniciar">🔁 Cambiar modo</button>
+  </main>
+
+  <!-- Primero las preguntas, después la lógica -->
+  <script src="preguntas.js"></script>
+  <script src="juego.js"></script>
+
+</body>
+</html>

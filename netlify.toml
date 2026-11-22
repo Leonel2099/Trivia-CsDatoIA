@@ -1,0 +1,6 @@
+# Configuración de Netlify
+# El sitio es HTML/CSS/JS puro: no hay build ni dependencias
+
+[build]
+  publish = "."
+  command = ""
