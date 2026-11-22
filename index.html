@@ -3,37 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preguntados - Tec. en Ciencias de Datos e IA</title>
+  <title>CS-datos &amp; IA TRIVIA</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- ==================== CABECERA ==================== -->
-  <header>
-    <h1>🎯 PREGUNTADOS</h1>
-    <p class="subtitulo">Tecnicatura en Ciencias de Datos e Inteligencia Artificial</p>
+  <header class="cabecera">
+    <img class="logo" src="src/images/logov1.png" alt="CS-datos & IA TRIVIA">
 
-    <div class="marcador" id="marcador">
-      <div class="equipo" id="equipo1">
-        <span class="nombre" id="nombre1">EQUIPO 1</span>
-        <span class="puntos" id="puntos1">0</span>
-        <span class="conquistas" id="conquistas1">0/8 asignaturas</span>
+    <!-- Barra del jugador: avatar, nombre, progreso y turno -->
+    <div class="barra-jugador oculto" id="barra-jugador">
+
+      <div class="avatar">
+        <!-- 👉 PONÉ ACÁ TU FOTO:
+             reemplazá la línea de abajo por:
+             <img src="src/images/tu-foto.jpg" alt="Jugador"> -->
+        <span class="avatar-inicial" id="avatar-inicial">J1</span>
       </div>
 
-      <div class="turno" id="turno">Turno: Equipo 1</div>
-
-      <div class="equipo" id="equipo2">
-        <span class="nombre">EQUIPO 2</span>
-        <span class="puntos" id="puntos2">0</span>
-        <span class="conquistas" id="conquistas2">0/8 asignaturas</span>
+      <div class="datos-jugador">
+        <span class="jugador-nombre" id="jugador-nombre">Jugador 1</span>
+        <div class="pills">
+          <span class="pill activo" id="pill1">J1 <b id="puntos1">0/8</b></span>
+          <span class="pill" id="pill2">J2 <b id="puntos2">0/8</b></span>
+        </div>
       </div>
+
+      <!-- Fichas de progreso: una por asignatura -->
+      <div class="progreso" id="progreso"></div>
+
+      <button id="btn-reiniciar" class="btn-chico" title="Reiniciar">🔄</button>
     </div>
-
-    <button id="btn-reiniciar" class="btn-reiniciar oculto">🔄 Reiniciar juego</button>
   </header>
 
   <!-- ==================== PANTALLA: MENÚ ==================== -->
-  <main id="pantalla-menu">
+  <main id="pantalla-menu" class="zona-juego">
     <h2 class="titulo-menu">¿Cómo querés jugar?</h2>
     <div class="menu-botones">
       <button id="btn-equipos" class="boton-menu naranja">
@@ -44,48 +49,62 @@
       <button id="btn-individual" class="boton-menu azul">
         <span class="icono">👤</span>
         <span>Un jugador</span>
-        <small>Solo vos: girá, respondé y sumá puntos</small>
+        <small>Solo vos: tirá la cinta y conquistá las 8 materias</small>
       </button>
     </div>
   </main>
 
-  <!-- ==================== PANTALLA: RULETA ==================== -->
-  <main id="pantalla-ruleta" class="oculto">
-    <h2 id="resultado-ruleta" class="resultado-ruleta">¡Girá la ruleta para empezar!</h2>
+  <!-- ==================== PANTALLA: CINTA ==================== -->
+  <main id="pantalla-juego" class="zona-juego oculto">
+    <h2 class="resultado-cinta" id="resultado-cinta">¡Presioná GIRAR!</h2>
 
-    <div class="ruleta-contenedor">
-      <!-- Flecha que marca la sección elegida -->
-      <div class="flecha">▼</div>
-      <!-- La ruleta se dibuja desde juego.js -->
-      <canvas id="ruleta" width="340" height="340"></canvas>
+    <div class="cinta-zona">
+      <!-- Flechas que marcan la tarjeta elegida -->
+      <div class="flecha flecha-arriba">▼</div>
+
+      <div class="cinta-viewport" id="cinta-viewport">
+        <!-- La cinta de tarjetas se genera desde juego.js -->
+        <div class="cinta-strip" id="cinta-strip"></div>
+        <!-- Marco dorado fijo en el centro -->
+        <div class="marco-central"></div>
+      </div>
+
+      <div class="flecha flecha-abajo">▲</div>
     </div>
 
-    <button id="btn-girar" class="btn-girar">🎡 Girar ruleta</button>
-    <p class="preguntas-restantes" id="preguntas-restantes"></p>
+    <button id="btn-girar" class="btn-girar">GIRAR</button>
+    <p class="info-juego" id="info-juego"></p>
   </main>
 
-  <!-- ==================== PANTALLA: PREGUNTA ==================== -->
-  <main id="pantalla-pregunta" class="oculto">
-    <div class="tarjeta-pregunta">
-      <span class="categoria-tag" id="categoria-tag"></span>
-      <h2 id="texto-pregunta"></h2>
-      <div id="opciones" class="opciones"></div>
-      <p class="feedback" id="feedback"></p>
-      <button id="btn-seguir" class="btn-girar oculto">Continuar</button>
+  <!-- ==================== PANTALLA: ASIGNATURA EN GRANDE ==================== -->
+  <main id="pantalla-asignatura" class="zona-juego oculto">
+    <div class="tarjeta-grande">
+      <img id="imagen-asignatura" src="" alt="Asignatura elegida">
+      <h2 id="nombre-asignatura"></h2>
+      <p class="consigna">Leé la tarjeta: ¿respondió bien?</p>
+      <div class="botones-juez">
+        <button id="btn-correcta" class="btn-correcta">✅ Correcta</button>
+        <button id="btn-incorrecta" class="btn-incorrecta">❌ Incorrecta</button>
+      </div>
     </div>
   </main>
 
   <!-- ==================== PANTALLA: FINAL ==================== -->
-  <main id="pantalla-final" class="oculto">
+  <main id="pantalla-final" class="zona-juego oculto">
     <h2>🏆 ¡Juego terminado! 🏆</h2>
     <p class="ganador" id="ganador"></p>
     <div class="marcador-final" id="marcador-final"></div>
     <button id="btn-jugar-otra" class="btn-girar">🔄 Jugar otra vez</button>
-    <button id="btn-cambiar-modo" class="btn-reiniciar">🔁 Cambiar modo</button>
+    <button id="btn-cambiar-modo" class="btn-chico">🔁 Cambiar modo</button>
   </main>
 
-  <!-- Primero las preguntas, después la lógica -->
-  <script src="preguntas.js"></script>
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="pie">
+    CS-datos &amp; IA — Todos los derechos reservados • Desarrollado con OpenCode
+  </footer>
+
+  <!-- Primero las asignaturas, después la lógica -->
+  <script src="asignaturas.js"></script>
   <script src="juego.js"></script>
 
 </body>

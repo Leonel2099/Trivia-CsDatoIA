@@ -1,6 +1,6 @@
 /* ============================================================
-   PREGUNTADOS - Estilos
-   Modificá los colores y tamaños a tu gusto
+   CS-datos & IA TRIVIA - Estilos
+   Diseño basado en el mockup (mokup.jpg)
    ============================================================ */
 
 * {
@@ -11,107 +11,203 @@
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   color: #fff;
   min-height: 100vh;
-  text-align: center;
-  padding-bottom: 40px;
-}
-
-/* ------------------- CABECERA ------------------- */
-
-header {
-  padding: 25px 15px 20px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  letter-spacing: 4px;
-  color: #f1c40f;
-  text-shadow: 2px 2px 0 #000;
-}
-
-.subtitulo {
-  color: #aab;
-  margin: 5px 0 20px;
-  font-size: 0.95rem;
-}
-
-/* ------------------- MARCADOR ------------------- */
-
-.marcador {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.equipo {
-  background: #0f3460;
-  border: 2px solid #e94560;
-  border-radius: 12px;
-  padding: 10px 25px;
   display: flex;
   flex-direction: column;
-  min-width: 150px;
+  /* Fondo azul oscuro con brillo (zona inferior) */
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(90, 40, 140, 0.55), transparent 60%),
+    linear-gradient(180deg, #0e2f5e 0%, #122a55 40%, #1a1035 100%);
+  text-align: center;
 }
 
-.equipo .nombre {
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  color: #e94560;
+.oculto {
+  display: none !important;
 }
 
-.equipo .puntos {
-  font-size: 2rem;
+/* ============================================================
+   CABECERA - logo y barra del jugador
+   ============================================================ */
+
+.cabecera {
+  padding: 18px 15px 14px;
+  background: linear-gradient(180deg, #17457f 0%, #0f3463 100%);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.15);
+}
+
+.logo {
+  width: min(420px, 80vw);
+  max-height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* ------------------- BARRA DEL JUGADOR ------------------- */
+
+.barra-jugador {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 12px;
+  border: 3px solid #cfd8e3;
+  background: #1c4d80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-inicial {
+  font-size: 1.5rem;
   font-weight: bold;
   color: #f1c40f;
 }
 
-.equipo .conquistas {
-  font-size: 0.75rem;
-  color: #8892b0;
-  margin-top: 2px;
+.datos-jugador {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
 }
 
-.turno {
-  background: #f1c40f;
-  color: #1a1a2e;
+.jugador-nombre {
+  font-size: 1.15rem;
   font-weight: bold;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.95rem;
 }
 
-/* Modo individual: ocultamos el equipo 2 y el turno */
-body.modo-individual #equipo2,
-body.modo-individual #turno {
-  display: none;
+.pills {
+  display: flex;
+  gap: 8px;
 }
 
-body.modo-individual #equipo1 .nombre {
-  color: #2ecc71;
-}
-
-body.modo-individual #equipo1 {
-  border-color: #2ecc71;
-}
-
-.btn-reiniciar {
-  margin-top: 15px;
-  background: transparent;
-  color: #8892b0;
-  border: 1px solid #8892b0;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
+.pill {
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 3px 12px;
   font-size: 0.85rem;
+  opacity: 0.6;
 }
 
-.btn-reiniciar:hover {
+.pill.activo {
+  opacity: 1;
+  border-color: #f1c40f;
+  background: rgba(241, 196, 15, 0.2);
+}
+
+.pill b {
+  color: #f1c40f;
+}
+
+/* ------------------- FICHAS DE PROGRESO ------------------- */
+
+.progreso {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px;
+  max-width: 100%;
+}
+
+.ficha {
+  flex-shrink: 0;
+  width: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.ficha-icono {
+  width: 70px;
+  height: 70px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 4px;
+  border: 2px solid #cfd8e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.ficha-icono img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  /* Sin conquistar: silueta negra del personaje.
+     El filtro va SOLO en la imagen: el fondo blanco vive en
+     .ficha-icono, así no se oscurece junto con el personaje */
+  filter: brightness(0);
+  transition: filter 0.3s;
+}
+
+.ficha span {
+  font-size: 0.78rem;
+  font-weight: bold;
+  line-height: 1.2;
+  color: #cfe0f5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Conquistada: aparece en color, con palomita */
+.ficha.conquistada .ficha-icono {
+  border-color: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.7);
+}
+
+.ficha.conquistada .ficha-icono img {
+  filter: none;
+}
+
+.ficha.conquistada span {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.btn-chico {
+  background: transparent;
+  color: #9fb6d9;
+  border: 1px solid #9fb6d9;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-chico:hover {
   color: #fff;
   border-color: #fff;
+}
+
+/* ============================================================
+   ZONA DE JUEGO (menú, cinta, pregunta, final)
+   ============================================================ */
+
+.zona-juego {
+  flex: 1;
+  padding: 25px 15px 35px;
 }
 
 /* ------------------- MENÚ ------------------- */
@@ -168,165 +264,216 @@ body.modo-individual #equipo1 {
   background: linear-gradient(135deg, #3498db, #2471a3);
 }
 
-/* ------------------- PANTALLAS ------------------- */
+/* ============================================================
+   CINTA (tipo slot machine)
+   ============================================================ */
 
-main {
-  padding: 20px 15px;
-}
-
-.oculto {
-  display: none !important;
-}
-
-/* ------------------- RULETA ------------------- */
-
-.resultado-ruleta {
+.resultado-cinta {
   font-size: 1.5rem;
-  margin-bottom: 25px;
   min-height: 40px;
+  margin-bottom: 10px;
   color: #f1c40f;
+  text-shadow: 2px 2px 0 #000;
 }
 
-.ruleta-contenedor {
+.cinta-zona {
   position: relative;
-  width: 340px;
-  height: 340px;
-  margin: 0 auto 25px;
+  max-width: 780px;
+  margin: 26px auto 0;
 }
 
 .flecha {
   position: absolute;
-  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 2.2rem;
-  color: #e94560;
-  z-index: 10;
-  text-shadow: 0 0 5px #000;
+  font-size: 2rem;
+  color: #f1c40f;
+  text-shadow: 0 0 8px rgba(241, 196, 15, 0.9), 2px 2px 0 #000;
+  z-index: 5;
+  line-height: 1;
 }
 
-canvas {
-  border-radius: 50%;
-  box-shadow: 0 0 0 6px #f1c40f, 0 10px 30px rgba(0, 0, 0, 0.6);
+.flecha-arriba {
+  top: -30px;
 }
+
+.flecha-abajo {
+  bottom: -32px;
+}
+
+.cinta-viewport {
+  position: relative;
+  height: 168px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.cinta-strip {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+}
+
+.carta-cinta {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.carta-cinta img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Marco dorado fijo en el centro (donde se elige la tarjeta) */
+.marco-central {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 152px;
+  height: 152px;
+  border: 4px solid #f1c40f;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow:
+    0 0 18px rgba(241, 196, 15, 0.75),
+    inset 0 0 16px rgba(241, 196, 15, 0.35);
+}
+
+/* ------------------- BOTÓN GIRAR ------------------- */
 
 .btn-girar {
-  background: #e94560;
-  color: #fff;
+  background: linear-gradient(180deg, #ffd44d 0%, #f1b31c 100%);
+  color: #4a2c00;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  padding: 14px 40px;
-  border-radius: 30px;
+  letter-spacing: 3px;
+  padding: 16px 70px;
+  margin-top: 44px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: transform 0.15s, background 0.2s;
+  box-shadow: 0 6px 0 #b8860b, 0 10px 20px rgba(0, 0, 0, 0.45);
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
 .btn-girar:hover:not(:disabled) {
-  background: #ff5a75;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+}
+
+.btn-girar:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #b8860b, 0 6px 12px rgba(0, 0, 0, 0.45);
 }
 
 .btn-girar:disabled {
-  background: #555;
+  background: #7a7a7a;
+  color: #ccc;
+  box-shadow: 0 6px 0 #555;
   cursor: not-allowed;
 }
 
-.preguntas-restantes {
-  margin-top: 15px;
-  color: #8892b0;
-  font-size: 0.9rem;
+.info-juego {
+  margin-top: 22px;
+  color: #a9c3e8;
+  font-size: 0.95rem;
 }
 
-/* ------------------- PREGUNTA ------------------- */
+/* ============================================================
+   MATERIA EN GRANDE (para juzgar con la tarjeta física)
+   ============================================================ */
 
-.tarjeta-pregunta {
-  background: #fff;
-  color: #1a1a2e;
-  max-width: 600px;
+.tarjeta-grande {
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  max-width: 430px;
   margin: 0 auto;
-  border-radius: 18px;
-  padding: 30px 25px;
+  border-radius: 20px;
+  padding: 25px 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-.categoria-tag {
-  display: inline-block;
-  color: #fff;
-  padding: 5px 18px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+.tarjeta-grande img {
+  width: 270px;
+  max-width: 72vw;
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
 }
 
-.tarjeta-pregunta h2 {
-  font-size: 1.35rem;
-  margin-bottom: 25px;
-  line-height: 1.4;
+.tarjeta-grande h2 {
+  font-size: 1.5rem;
+  margin: 16px 0 4px;
 }
 
-.opciones {
+.consigna {
+  color: #a9c3e8;
+  margin-bottom: 20px;
+  font-size: 0.98rem;
+}
+
+.botones-juez {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.opcion {
-  background: #f0f2f5;
-  border: 2px solid #d0d5dd;
-  color: #1a1a2e;
-  padding: 14px;
-  border-radius: 10px;
-  font-size: 1rem;
+.btn-correcta,
+.btn-incorrecta {
+  border: none;
+  border-radius: 14px;
+  padding: 16px 30px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: transform 0.12s, filter 0.12s, box-shadow 0.12s;
 }
 
-.opcion:hover:not(:disabled) {
-  background: #e3e8ef;
-  border-color: #e94560;
+.btn-correcta {
+  background: linear-gradient(180deg, #2ecc71, #27ae60);
+  box-shadow: 0 5px 0 #1e8e50;
 }
 
-.opcion:disabled {
-  cursor: not-allowed;
+.btn-incorrecta {
+  background: linear-gradient(180deg, #e74c3c, #c0392b);
+  box-shadow: 0 5px 0 #922b21;
 }
 
-.opcion.correcta {
-  background: #2ecc71;
-  border-color: #27ae60;
-  color: #fff;
-  font-weight: bold;
+.btn-correcta:hover,
+.btn-incorrecta:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
 }
 
-.opcion.incorrecta {
-  background: #e74c3c;
-  border-color: #c0392b;
-  color: #fff;
+.btn-correcta:active,
+.btn-incorrecta:active {
+  transform: translateY(3px);
+  box-shadow: none;
 }
 
-.feedback {
-  margin-top: 18px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-height: 28px;
-}
-
-.feedback.ok {
-  color: #27ae60;
-}
-
-.feedback.mal {
-  color: #c0392b;
-}
-
-/* ------------------- PANTALLA FINAL ------------------- */
+/* ============================================================
+   PANTALLA FINAL
+   ============================================================ */
 
 #pantalla-final h2 {
   font-size: 2.2rem;
   color: #f1c40f;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 0 #000;
 }
 
 .ganador {
@@ -337,7 +484,7 @@ canvas {
 }
 
 .marcador-final {
-  background: #0f3460;
+  background: rgba(0, 0, 0, 0.4);
   display: inline-block;
   padding: 20px 40px;
   border-radius: 12px;
@@ -346,35 +493,71 @@ canvas {
   line-height: 2;
 }
 
-#btn-cambiar-modo {
+#btn-jugar-otra {
   display: block;
-  margin: 12px auto 0;
+  margin: 0 auto;
 }
 
-/* ------------------- RESPONSIVE ------------------- */
+#btn-cambiar-modo {
+  display: block;
+  margin: 16px auto 0;
+}
 
-@media (max-width: 420px) {
-  header h1 {
-    font-size: 1.8rem;
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.pie {
+  background: rgba(0, 0, 0, 0.45);
+  color: #cfe0f5;
+  padding: 16px 15px;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 620px) {
+  .logo {
+    max-height: 90px;
   }
 
-  .ruleta-contenedor {
-    width: 290px;
-    height: 290px;
+  .cinta-viewport {
+    height: 138px;
   }
 
-  canvas {
-    width: 290px;
-    height: 290px;
+  .cinta-strip {
+    top: 12px;
+    gap: 12px;
+  }
+
+  .carta-cinta {
+    width: 114px;
+    height: 114px;
+  }
+
+  .marco-central {
+    width: 124px;
+    height: 124px;
   }
 
   .btn-girar {
-    font-size: 1rem;
-    padding: 12px 28px;
+    font-size: 1.3rem;
+    padding: 14px 50px;
+    margin-top: 40px;
   }
 
-  .boton-menu {
-    width: 100%;
-    max-width: 280px;
+  .ficha {
+    width: 76px;
+  }
+
+  .ficha-icono {
+    width: 58px;
+    height: 58px;
+  }
+
+  .ficha span {
+    font-size: 0.68rem;
   }
 }
